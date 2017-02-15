@@ -4,9 +4,25 @@ var menuItems,
     navigationViewModel = new observable.Observable();
 
 menuItems = [{
-    "title": "Home View",
+    "title": "HomeView",
     "moduleName": "components/homeView/homeView",
     "icon": "\ue0dd"
+}, {
+    "title": "Categorias",
+    "moduleName": "components/categorias/categorias",
+    "icon": "\ue204"
+}, {
+    "title": "Subcategorias",
+    "moduleName": "components/subcategorias/subcategorias",
+    "icon": "\ue0e2"
+}, {
+    "title": "Productos",
+    "moduleName": "components/productos/productos",
+    "icon": "\ue0d7"
+}, {
+    "title": "Pedidos",
+    "moduleName": "components/pedidos/pedidos",
+    "icon": "\ue206"
 }];
 
 navigationViewModel.set('menuItems', menuItems);

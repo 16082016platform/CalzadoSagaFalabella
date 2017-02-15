@@ -5,12 +5,173 @@
       "type": "NativeScript:view",
       "name": "homeView",
       "components": [],
-      "title": "Home View",
+      "title": "HomeView",
       "addToNavigation": true,
       "icon": "home"
+    },
+    {
+      "type": "NativeScript:view",
+      "name": "categorias",
+      "components": [
+        {
+          "type": "NativeScript:editableList",
+          "serverSideSorting": false,
+          "serverSidePaging": false,
+          "listExtraFields": [],
+          "detailExtraFields": [],
+          "addScreenExtraFields": [],
+          "editScreenExtraFields": [],
+          "components": [],
+          "name": "categoriasModel",
+          "dataProvider": "backendServices",
+          "collection": "categorias",
+          "headerField": "nombre",
+          "subHeaderField": "ruta",
+          "isMapView": false,
+          "addItemForm": false,
+          "editItemForm": false,
+          "deleteItemButton": false,
+          "pullToRefresh": false,
+          "endlessScroll": false,
+          "itemActionView": "subcategorias",
+          "itemActionPrimaryKey": "Id",
+          "itemActionSecondaryKey": "categoria",
+          "detailHeaderFieldSource": "dataBound",
+          "detailHeaderField": "nombre",
+          "detailSubHeaderField": "nombre",
+          "detailDescriptionField": "ruta"
+        }
+      ],
+      "title": "Categorias",
+      "addToNavigation": true,
+      "icon": "bookmarks"
+    },
+    {
+      "type": "NativeScript:view",
+      "name": "subcategorias",
+      "components": [
+        {
+          "type": "NativeScript:editableList",
+          "serverSideSorting": false,
+          "serverSidePaging": false,
+          "listExtraFields": [],
+          "detailExtraFields": [],
+          "addScreenExtraFields": [],
+          "editScreenExtraFields": [],
+          "components": [],
+          "name": "subcategoriasModel",
+          "dataProvider": "backendServices",
+          "collection": "subcategorias",
+          "headerField": "nombre",
+          "subHeaderField": "categoria",
+          "isMapView": false,
+          "addItemForm": false,
+          "editItemForm": false,
+          "deleteItemButton": false,
+          "pullToRefresh": false,
+          "endlessScroll": false,
+          "itemActionView": "productos",
+          "itemActionPrimaryKey": "Id",
+          "itemActionSecondaryKey": "subcategoria",
+          "detailHeaderFieldSource": "dataBound",
+          "detailHeaderField": "nombre",
+          "detailDescriptionField": "categoria"
+        }
+      ],
+      "title": "Subcategorias",
+      "addToNavigation": true,
+      "icon": "details"
+    },
+    {
+      "type": "NativeScript:view",
+      "name": "productos",
+      "components": [
+        {
+          "type": "NativeScript:editableList",
+          "serverSideSorting": false,
+          "serverSidePaging": false,
+          "listExtraFields": [],
+          "detailExtraFields": [],
+          "addScreenExtraFields": [],
+          "editScreenExtraFields": [],
+          "components": [],
+          "name": "productosModel",
+          "dataProvider": "backendServices",
+          "collection": "productos",
+          "headerField": "nombre",
+          "subHeaderField": "ruta",
+          "isMapView": false,
+          "addItemForm": false,
+          "editItemForm": false,
+          "deleteItemButton": false,
+          "pullToRefresh": false,
+          "endlessScroll": false,
+          "detailHeaderFieldSource": "dataBound",
+          "detailHeaderField": "nombre",
+          "detailSubHeaderField": "descripcion",
+          "detailDescriptionField": "descripcion"
+        }
+      ],
+      "title": "Productos",
+      "addToNavigation": true,
+      "icon": "favorites"
+    },
+    {
+      "type": "NativeScript:view",
+      "name": "pedidos",
+      "components": [
+        {
+          "type": "NativeScript:form",
+          "components": [
+            {
+              "type": "NativeScript:editableListForm",
+              "components": [
+                {
+                  "type": "NativeScript:editableListFormField",
+                  "name": "producto",
+                  "title": "Producto",
+                  "inputType": "text",
+                  "titlePosition": "top",
+                  "inputTextType": "text",
+                  "dataBinding": "producto"
+                },
+                {
+                  "type": "NativeScript:editableListFormField",
+                  "name": "estado",
+                  "title": "Estado",
+                  "inputType": "text",
+                  "titlePosition": "top",
+                  "inputTextType": "text",
+                  "dataBinding": "estado"
+                }
+              ],
+              "name": "editableListForm33",
+              "formType": "add"
+            }
+          ],
+          "name": "pedidosModel",
+          "enableDataBinding": true,
+          "dataProvider": "backendServices",
+          "collection": "pedidos",
+          "submitButton": "Solicitar",
+          "cancelButton": "Cancelar"
+        }
+      ],
+      "title": "Pedidos",
+      "addToNavigation": true,
+      "icon": "cart"
     }
   ],
-  "dataProviders": [],
+  "dataProviders": [
+    {
+      "type": "NativeScript:dataProvider",
+      "name": "backendServices",
+      "source": "everlive",
+      "everliveKey": "5f12djusm0e26jin",
+      "offlineStorage": true,
+      "title": "Backend Services"
+    }
+  ],
   "name": "nativeScriptApp",
   "navigation": "listmenu",
   "transition": "none",
