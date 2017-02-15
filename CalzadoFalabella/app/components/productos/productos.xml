@@ -3,7 +3,7 @@
         <widgets:action-bar />
     </Page.actionBar>
 
-    <StackLayout>
+    <!--<StackLayout>
 
         <GridLayout rows="auto, *">
 
@@ -19,17 +19,33 @@
                             </StackLayout>
 
                         </GridLayout>
-                        <!-- additional view content -->
+                  
                     </StackLayout>
                 </ListView.itemTemplate>
             </ListView>
             <ActivityIndicator row="1" busy="{{ isLoading }}" />
         </GridLayout>
-        <!-- additional view content -->
+    </StackLayout>-->
 
-        <!-- START_CUSTOM_CODE_productos -->
-        <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
-
-        <!-- END_CUSTOM_CODE_productos -->
-    </StackLayout>
+    <ScrollView>
+        <Repeater items="{{ listItems }}">
+            <Repeater.itemsLayout>
+                <WrapLayout />
+            </Repeater.itemsLayout>
+            <Repeater.itemTemplate>
+                <GridLayout rows="*, auto" tap="onListViewItemTap" index="{{ index }}" margin="10" width="100">
+                    <android>
+                        <Image src="{{ subruta ? '~/images/'+categoria+'/' + imagen + '.jpg' : '~/images/vacio.jpg'}}" loadMode="async" stretch="aspectFill"/>
+                    </android>
+                    <ios>
+                        <Image src="{{ subruta ? '~/images/'+categoria+'/' + imagen + '.jpg' : '~/images/vacio.jpg'}}" stretch="aspectFill" loadMode="async" />
+                    </ios>
+                    <StackLayout row="1" cssClass="recipeContainer">
+                        <Label text="{{ header }}" cssClass="recipeTitle"/>
+                        <!--<Label text="{{ descripcion }}" cssClass="recipeAuthor"/>-->
+                    </StackLayout>
+                </GridLayout>
+            </Repeater.itemTemplate>
+        </Repeater>
+    </ScrollView>
 </Page>

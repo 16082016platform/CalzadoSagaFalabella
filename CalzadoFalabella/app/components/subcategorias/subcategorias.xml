@@ -15,7 +15,7 @@
 
                             <StackLayout col="0" cssClass="padded-label-stack">
                                 <Label text="{{ header }}" cssClass="title-label" textWrap="true" />
-                                <Label text="{{ description }}" textWrap="true" />
+                                
                             </StackLayout>
 
                         </GridLayout>

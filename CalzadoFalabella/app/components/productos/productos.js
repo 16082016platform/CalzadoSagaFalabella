@@ -9,7 +9,9 @@ var isInit = true,
     viewModel = require('./productos-view-model');
 
 function onListViewItemTap(args) {
-    var itemData = viewModel.get('listItems')[args.index];
+    var page = args.object;
+    
+    var itemData = viewModel.get('listItems')[page.index];
 
     helpers.navigate({
         moduleName: 'components/productos/itemDetails/itemDetails',
@@ -60,20 +62,21 @@ function pageLoaded(args) {
     _fetchData()
         .then(function(result) {
             var itemsList = [];
-
+            var index = 0;
             result.forEach(function(item) {
-
                 flattenLocationProperties(item);
-
+                
                 itemsList.push({
-
                     header: item.nombre,
+                    
+                    subruta:  item.subruta,
 
-                    description: item.ruta,
+                    index: index,
 
                     // singleItem properties
                     details: item
                 });
+                index++;
             });
 
             viewModel.set('listItems', itemsList);

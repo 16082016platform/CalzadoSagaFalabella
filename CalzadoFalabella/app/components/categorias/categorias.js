@@ -1,4 +1,8 @@
 'use strict';
+
+var frameModule = require("ui/frame");
+var imageModule = require("ui/image");
+
 var isInit = true,
     helpers = require('../../utils/widgets/helper'),
     navigationProperty = require('../../utils/widgets/navigation-property'),
@@ -64,17 +68,18 @@ function pageLoaded(args) {
     _fetchData()
         .then(function(result) {
             var itemsList = [];
-
+            var index = 0;
             result.forEach(function(item) {
-
+                index ++;
                 flattenLocationProperties(item);
 
                 itemsList.push({
 
                     header: item.nombre,
 
-                    description: item.ruta,
+                    index: index,
 
+                    imagen: item.nombre.replace(/ñ/g,'n'),
                     // singleItem properties
                     details: item
                 });

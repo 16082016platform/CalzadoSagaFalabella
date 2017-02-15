@@ -154,3 +154,9 @@ switch {
 
 
 /* END_CUSTOM_CODE_nativeScriptApp */
+
+
+actionBar{
+    background-color:#b2c804;
+    color:white;
+}
