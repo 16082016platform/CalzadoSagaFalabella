@@ -14,14 +14,39 @@ var isInit = true,
 var frameModule = require("ui/frame");
 
 function onRequestSuccess() {
-    setTimeout(function () {
-        frameModule.topmost().navigate({
-            moduleName: "components/homeView/homeView",
-            animated: false
-        });
-    }, 9000);
-
+    startCount();
 }
+
+var c = 0;
+var t;
+var timer_is_on = 0;
+function timedCount() {
+    c = c + 1;
+    t = setTimeout(function () { timedCount() }, 1000);
+    if (c == 5) {
+        stopCount();
+    }
+}
+
+function startCount() {
+    //if (!timer_is_on) {
+    timer_is_on = 1;
+    timedCount();
+    //}
+}
+
+function stopCount() {
+    clearTimeout(t);
+    timer_is_on = 0;
+    c = 0;
+    frameModule.topmost().navigate({
+        moduleName: "components/homeView/homeView",
+        animated: false
+    });
+}
+
+
+
 
 function onRequestFail(err) {
     alert(JSON.stringify(err));
