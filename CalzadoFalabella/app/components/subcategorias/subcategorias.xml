@@ -5,7 +5,7 @@
 
     <StackLayout>
 
-        <GridLayout rows="auto, *">
+        <GridLayout rows="auto, *,auto">
 
             <ListView row="1" items="{{ listItems }}" itemTap="onListViewItemTap">
                 <ListView.itemTemplate>
@@ -24,6 +24,9 @@
                 </ListView.itemTemplate>
             </ListView>
             <ActivityIndicator row="1" busy="{{ isLoading }}" />
+            <AbsoluteLayout row="2" style.horizontalAlignment="right" style.verticalAlignment="bottom">
+                <Image src="~/images/back.png" tap="buttonBackTap" />
+            </AbsoluteLayout>
         </GridLayout>
         <!-- additional view content -->
 

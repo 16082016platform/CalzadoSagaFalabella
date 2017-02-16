@@ -7,13 +7,13 @@
         <StackLayout>
 
             <GridLayout columns="4*,*" cssClass="grid">
-                <Image col="0" src="{{ subruta ? '~/images/categorias/'+subcategoriaExpand+'/' + codigo + '_1.jpg' : '~/images/vacio.jpg'}}" loadMode="async" stretch="aspectFill"/>
+                <Image col="0" id="imagenGrande" src="{{ subruta ? '~/images/categorias/'+subcategoriaExpand+'/' + codigo + '_1.jpg' : '~/images/vacio.jpg'}}" loadMode="async" stretch="aspectFill"/>
                 <Repeater col="1" items="{{ subruta }}">
                     <Repeater.itemsLayout>
                         <WrapLayout />
                     </Repeater.itemsLayout>
                     <Repeater.itemTemplate>
-                        <Image src="{{ $value }}"/>
+                        <Image src="{{ $value }}" tap="selectImagen"/>
                     </Repeater.itemTemplate>
                 </Repeater>
             </GridLayout>
@@ -34,7 +34,7 @@
                         <Image src="{{ puntuacion>=5? '~/images/start.png': '~/images/startDisabled.png' }}" loadMode="async" stretch="none"/>
                     </WrapLayout>
                 </StackLayout>
-                <Label col="0" row="1" colSpan="2" text="{{ descripcion }}" textWrap="true" cssClass="titulo" style.fontWeight="normal" style.marginBottom="30" />
+                <Label col="0" row="1" colSpan="2" text="{{ descripcion }}" textWrap="true" cssClass="titulo" style.fontWeight="normal" style.marginBottom="30" style.marginTop="0" />
             </GridLayout>
 
 
@@ -50,9 +50,9 @@
                         </Repeater.itemTemplate>
                     </Repeater>
                 </StackLayout>
-                <StackLayout col="1" style.textAlignment="right">
-                    <Label text="Colores Disponibles" visibility="{{ colores? 'visible':'collapsed' }}" cssClass="titulo" />
-                    <Repeater items="{{ colores }}" visibility="{{ colores? 'visible':'collapsed' }}">
+                <StackLayout col="1" style.textAlignment="right"  visibility="{{ colores? 'visible':'collapsed' }}">
+                    <Label text="Colores Disponibles" cssClass="titulo" />
+                    <Repeater items="{{ colores }}">
                         <Repeater.itemsLayout style.horizontalAlignment="right">
                             <WrapLayout style.horizontalAlignment="right" />
                         </Repeater.itemsLayout>
@@ -68,7 +68,7 @@
             <GridLayout columns="auto,*" cssClass="grid">
                 <StackLayout col="0" style.marginBottom="30">
                     <Label text="Características"  cssClass="titulo" />
-                    <Label text="{{ caracteristicas }}" textWrap="true" />
+                    <Label text="{{ caracteristicas }}" textWrap="true" style.marginTop="0"/>
                 </StackLayout>
                 <StackLayout col="1" style.horizontalAlignment="right" style.verticalAlignment="bottom">
                     <Label text="Solicitar Prueba" cssClass="solicitarProducto" textWrap="true" tap="selectSolicitar" />

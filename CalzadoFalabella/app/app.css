@@ -12,16 +12,12 @@ button {
     horizontal-align: stretch;
 }
 
-image,
-activityindicator {
+image, activityindicator {
     horizontal-align: center;
     vertical-align: center;
 }
 
-label,
-textfield,
-searchbar,
-switch {
+label, textfield, searchbar, switch {
     vertical-align: center;
 }
 
@@ -155,8 +151,18 @@ switch {
 
 /* END_CUSTOM_CODE_nativeScriptApp */
 
+actionBar {
+    background-color: #b2c804;
+    color: white;
+    height: 0;
+}
 
-actionBar{
-    background-color:#b2c804;
-    color:white;
+AbsoluteLayout {
+    text-align: right;
+}
+
+AbsoluteLayout Image {
+    height: 100;
+    width: 100;
+    margin: 30;
 }

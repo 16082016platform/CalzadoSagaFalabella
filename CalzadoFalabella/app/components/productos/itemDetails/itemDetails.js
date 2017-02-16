@@ -2,16 +2,18 @@ var helpers = require('../../../utils/widgets/helper'),
 
     dialogs = require('ui/dialogs'),
 
-    dataService = require('../../../dataProviders/backendServices'),
+    dataService = require('../../../dataProviders/backendServices');
 
-    viewModel = require('../productos-view-model');
+var productoSelected, tallaSelected, colorSelected, codigoSelected, subrutaSelected, precioSelected;
 
 function navigatedTo(args) {
     var page = args.object;
 
-    page.navigationContext.pageTitle =
-        page.navigationContext.nombre;
+    page.navigationContext.pageTitle = page.navigationContext.nombre;
 
+    productoSelected = page.navigationContext.Id;
+    codigoSelected = page.navigationContext.codigo;
+    precioSelected = page.navigationContext.precio;
     // context changes
 
     var subruta = page.navigationContext.subruta;
@@ -19,9 +21,34 @@ function navigatedTo(args) {
         for (var i = 0; i < subruta.length; i++) {
             subruta[i] = '~/images/categorias/' + page.navigationContext.subcategoriaExpand + '/' + page.navigationContext.codigo + '_' + subruta[i] + '.jpg';
             page.navigationContext.subruta[i] = subruta[i];
-        }
+            subrutaSelected = subruta[0];
+        }        
     }
-    page.bindingContext = page.navigationContext;
+
+    var tallas = page.navigationContext.tallas;
+    var colores = page.navigationContext.colores;
+
+    page.bindingContext = page.navigationContext
+
+
+
+    if (typeof (tallas) !== "undefined") {
+        var menor = 0;
+        for (var i = 0; i < tallas.length; i++) {
+            i == 0 ? menor = tallas[i] : "";
+            if (menor > tallas[i]) {
+                menor = tallas[i];
+            }
+        }
+        page.getViewById("talla" + menor).cssClass = "tallaProductoSelected";
+        tallaSelected = menor;
+    }
+
+    if (typeof (colores) !== "undefined") {
+        page.getViewById("color" + colores[0]).cssClass = "colorProductoSelected";
+        colorSelected = colores[0];
+    }
+
 }
 exports.navigatedTo = navigatedTo;
 
@@ -35,8 +62,8 @@ function selectTalla(args) {
     for (var i = 0; i < array.length; i++) {
         items.getViewById("talla" + array[i]).cssClass = "tallaProducto";
     }
-
     page.cssClass = "tallaProductoSelected";
+    tallaSelected = page.text; 
 }
 exports.selectTalla = selectTalla;
 
@@ -50,7 +77,36 @@ function selectColor(args) {
     for (var i = 0; i < array.length; i++) {
         items.getViewById("color" + array[i]).cssClass = "colorProducto";
     }
-
     page.cssClass = "colorProductoSelected";
+    colorSelected = page.text;
 }
 exports.selectColor = selectColor;
+
+function selectImagen(args) {
+    var page = args.object;
+
+    var items = page.parent.parent.parent;
+    items.getViewById("imagenGrande").src = page.src;
+    
+}
+exports.selectImagen = selectImagen;
+
+
+function selectSolicitar(args) {
+    helpers.navigate({
+        moduleName: 'components/pedidos/pedidos',
+        animated: true,
+        transition: {
+            name: "slide"
+        },
+        context: {
+            producto: productoSelected,
+            talla: tallaSelected,
+            color: colorSelected,
+            subruta: subrutaSelected,
+            codigo: codigoSelected,
+            precio: precioSelected,
+        }
+    });
+}
+exports.selectSolicitar = selectSolicitar;

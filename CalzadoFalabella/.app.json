@@ -143,6 +143,24 @@
                   "titlePosition": "top",
                   "inputTextType": "text",
                   "dataBinding": "estado"
+                },
+                {
+                  "type": "NativeScript:editableListFormField",
+                  "name": "color",
+                  "title": "Color",
+                  "inputType": "text",
+                  "titlePosition": "top",
+                  "inputTextType": "text",
+                  "dataBinding": "color"
+                },
+                {
+                  "type": "NativeScript:editableListFormField",
+                  "name": "talla",
+                  "title": "Talla",
+                  "inputType": "text",
+                  "titlePosition": "top",
+                  "inputTextType": "text",
+                  "dataBinding": "talla"
                 }
               ],
               "name": "editableListForm33",

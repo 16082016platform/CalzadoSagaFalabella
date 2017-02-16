@@ -15,6 +15,10 @@ function onListViewItemTap(args) {
 
     helpers.navigate({
         moduleName: 'components/productos/itemDetails/itemDetails',
+        animated: true,
+        transition: {
+            name: "slide"
+        },
         context: itemData.details
     });
 }
@@ -99,3 +103,11 @@ function pageLoaded(args) {
 
 // END_CUSTOM_CODE_productos
 exports.pageLoaded = pageLoaded;
+
+
+var frameModule = require("ui/frame");
+function buttonBackTap(args) {
+    var topmost = frameModule.topmost();
+    topmost.goBack();
+}
+exports.buttonBackTap = buttonBackTap;

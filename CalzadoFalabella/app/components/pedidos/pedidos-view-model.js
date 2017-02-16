@@ -28,6 +28,10 @@ ViewModel = new Observable({
 
     estado: '',
 
+    color: '',
+
+    talla: '',
+
     // additional properties
 
 });

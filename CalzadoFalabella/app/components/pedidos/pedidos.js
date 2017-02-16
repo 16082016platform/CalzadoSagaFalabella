@@ -10,7 +10,16 @@ var isInit = true,
 
     viewModel = require('./pedidos-view-model');
 
+
+var frameModule = require("ui/frame");
+
 function onRequestSuccess() {
+    setTimeout(function () {
+        frameModule.topmost().navigate({
+            moduleName: "components/homeView/homeView",
+            animated: false
+        });
+    }, 9000);
 
 }
 
@@ -24,13 +33,17 @@ function saveData() {
 
     data.save({
 
-            producto: viewModel.get('producto'),
+        producto: viewModel.get('producto'),
 
-            estado: viewModel.get('estado'),
+        estado: viewModel.get('estado'),
 
-            // save properties
+        color: viewModel.get('color'),
 
-        })
+        talla: viewModel.get('talla'),
+
+        // save properties
+
+    })
         .then(onRequestSuccess.bind(this))
         .catch(onRequestFail.bind(this));
 }
@@ -47,11 +60,9 @@ function onpedidosModelFormCancel() {
 
 function pageLoaded(args) {
     var page = args.object;
-
     helpers.platformInit(page);
     page.bindingContext = viewModel;
     // additional pageLoaded
-
     if (isInit) {
         isInit = false;
 
@@ -62,6 +73,14 @@ function pageLoaded(args) {
         // additional pageInit
 
     }
+    var datos = page.navigationContext;
+    viewModel.set('producto', datos.producto);
+    viewModel.set('talla', datos.talla);
+    viewModel.set('color', datos.color);
+    viewModel.set('estado', 'Pendiente');
+
+    onpedidosModelFormSubmit();
+
 }
 
 // START_CUSTOM_CODE_pedidos

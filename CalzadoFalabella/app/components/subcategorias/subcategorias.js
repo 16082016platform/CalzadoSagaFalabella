@@ -13,6 +13,10 @@ function onListViewItemTap(args) {
 
     helpers.navigate({
         moduleName: 'components/productos/productos',
+        animated: true,
+        transition: {
+            name: "slide"
+        },
         context: {
             filter: {
                 subcategoria: itemData.details.Id
@@ -100,3 +104,11 @@ function pageLoaded(args) {
 
 // END_CUSTOM_CODE_subcategorias
 exports.pageLoaded = pageLoaded;
+
+
+var frameModule = require("ui/frame");
+function buttonBackTap(args) {
+    var topmost = frameModule.topmost();
+    topmost.goBack();
+}
+exports.buttonBackTap = buttonBackTap;

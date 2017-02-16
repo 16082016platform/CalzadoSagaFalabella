@@ -49,4 +49,33 @@
             </Repeater.itemTemplate>
         </Repeater>
     </ScrollView>
+
+    <GridLayout rows="auto, *,auto">
+        <ScrollView>
+                <Repeater items="{{ listItems }}">
+                    <Repeater.itemsLayout>
+                        <WrapLayout />
+                    </Repeater.itemsLayout>
+                    <Repeater.itemTemplate>
+                        <GridLayout rows="*, auto" tap="onListViewItemTap" index="{{ index }}" padding="30" margin="30" width="300">
+                            <android>
+                                <Image src="{{ subruta ? '~/images/categorias/'+details.subcategoriaExpand+'/' + details.codigo + '_1.jpg' : '~/images/vacio.jpg'}}" loadMode="async" stretch="aspectFill"/>
+                            </android>
+                            <ios>
+                                <Image src="{{ subruta ? '~/images/categorias/'+details.subcategoriaExpand+'/' + details.codigo + '_1.jpg' : '~/images/vacio.jpg'}}" stretch="aspectFill" loadMode="async" />
+                            </ios>
+                            <StackLayout row="1" cssClass="recipeContainer">
+                                <Label text="{{ details.marcaExpand }}" cssClass="marcaProducto"/>>
+                                <Label text="{{ header }}" cssClass="nombreProducto"/>
+                                <Label text="{{ 'S/ ' + details.precio }}" cssClass="precioProducto"/>>
+                            </StackLayout>
+                        </GridLayout>
+                    </Repeater.itemTemplate>
+                </Repeater>
+            </ScrollView>
+        <ActivityIndicator row="1" busy="{{ isLoading }}" />
+        <AbsoluteLayout row="2" style.horizontalAlignment="right" style.verticalAlignment="bottom">
+            <Image src="~/images/back.png" tap="buttonBackTap" />
+        </AbsoluteLayout>
+    </GridLayout>
 </Page>

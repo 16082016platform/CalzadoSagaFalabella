@@ -17,6 +17,10 @@ function onListViewItemTap(args) {
 
     helpers.navigate({
         moduleName: 'components/subcategorias/subcategorias',
+        animated: true,
+        transition: {
+            name: "slide"
+        },
         context: {
             filter: {
                 categoria: itemData.details.Id
@@ -28,7 +32,7 @@ exports.onListViewItemTap = onListViewItemTap;
 
 function flattenLocationProperties(dataItem) {
     var propName, propValue,
-        isLocation = function(value) {
+        isLocation = function (value) {
             return propValue && typeof propValue === 'object' &&
                 propValue.longitude && propValue.latitude;
         };
@@ -66,11 +70,11 @@ function pageLoaded(args) {
     };
 
     _fetchData()
-        .then(function(result) {
+        .then(function (result) {
             var itemsList = [];
             var index = 0;
-            result.forEach(function(item) {
-                index ++;
+            result.forEach(function (item) {
+                index++;
                 flattenLocationProperties(item);
 
                 itemsList.push({
@@ -79,7 +83,7 @@ function pageLoaded(args) {
 
                     index: index,
 
-                    imagen: item.nombre.replace(/ñ/g,'n'),
+                    imagen: item.nombre.replace(/ñ/g, 'n'),
                     // singleItem properties
                     details: item
                 });
