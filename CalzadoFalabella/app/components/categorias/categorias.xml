@@ -4,13 +4,12 @@
     </Page.actionBar>
 
     <StackLayout>
-
         <GridLayout rows="auto, *">
 
             <ListView row="1" items="{{ listItems }}" itemTap="onListViewItemTap">
                 <ListView.itemTemplate>
                     <StackLayout>
-                        <GridLayout columns="*,auto" cssClass="padded-label">
+                        <GridLayout columns="*" cssClass="padded-label">
 
                             <StackLayout col="0" cssClass="{{ 'padded-label-stack-' + index }}">
                                 <Image src="{{ '~/images/categorias/' + imagen + '.jpg'}}"/>

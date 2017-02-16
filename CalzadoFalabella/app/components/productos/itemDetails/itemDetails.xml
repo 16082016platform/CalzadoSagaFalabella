@@ -6,20 +6,72 @@
     <ScrollView>
         <StackLayout>
 
-            <GridLayout rows="auto, *">
-                <GridLayout rows="auto" columns="*, *">
+            <GridLayout columns="4*,*" cssClass="grid">
+                <Image col="0" src="{{ subruta ? '~/images/categorias/'+subcategoriaExpand+'/' + codigo + '_1.jpg' : '~/images/vacio.jpg'}}" loadMode="async" stretch="aspectFill"/>
+                <Repeater col="1" items="{{ subruta }}">
+                    <Repeater.itemsLayout>
+                        <WrapLayout />
+                    </Repeater.itemsLayout>
+                    <Repeater.itemTemplate>
+                        <Image src="{{ $value }}"/>
+                    </Repeater.itemTemplate>
+                </Repeater>
+            </GridLayout>
+        
+            <GridLayout columns="auto,*" rows="*,*" cssClass="grid">
+                <StackLayout col="0" row="0">
+                    <Label text="{{ marcaExpand }}" cssClass="titulo"/>
+                    <Label text="{{ nombre }}" cssClass="titulo" style.marginTop="0"/>
+                    <Label text="{{ 'Código de producto: ' + codigo }}" style.fontWeight="bold" style.marginTop="0" style.marginBottom="30" />
+                </StackLayout>
+                <StackLayout col="1" row="0">
+                    <Label text="{{ 'S/ ' + precio }}" cssClass="precioProducto" />
+                    <WrapLayout orientation="horizontal" style.horizontalAlignment="right" >
+                        <Image src="{{ puntuacion>=1? '~/images/start.png': '~/images/startDisabled.png' }}" loadMode="async" stretch="none"/>
+                        <Image src="{{ puntuacion>=2? '~/images/start.png': '~/images/startDisabled.png' }}" loadMode="async" stretch="none"/>
+                        <Image src="{{ puntuacion>=3? '~/images/start.png': '~/images/startDisabled.png' }}" loadMode="async" stretch="none"/>
+                        <Image src="{{ puntuacion>=4? '~/images/start.png': '~/images/startDisabled.png' }}" loadMode="async" stretch="none"/>
+                        <Image src="{{ puntuacion>=5? '~/images/start.png': '~/images/startDisabled.png' }}" loadMode="async" stretch="none"/>
+                    </WrapLayout>
+                </StackLayout>
+                <Label col="0" row="1" colSpan="2" text="{{ descripcion }}" textWrap="true" cssClass="titulo" style.fontWeight="normal" style.marginBottom="30" />
+            </GridLayout>
 
 
-                </GridLayout>
-                <StackLayout row="1">
+            <GridLayout columns="*,*" cssClass="grid">
+                <StackLayout col="0">
+                    <Label text="Tallas Disponibles" cssClass="titulo"/>
+                    <Repeater items="{{ tallas }}">
+                        <Repeater.itemsLayout>
+                            <WrapLayout />
+                        </Repeater.itemsLayout>
+                        <Repeater.itemTemplate>
+                            <Button id="{{ 'talla'+$value }}" text="{{ $value }}" margin="10" cssClass="tallaProducto" tap="selectTalla" />
+                        </Repeater.itemTemplate>
+                    </Repeater>
+                </StackLayout>
+                <StackLayout col="1" style.textAlignment="right">
+                    <Label text="Colores Disponibles" visibility="{{ colores? 'visible':'collapsed' }}" cssClass="titulo" />
+                    <Repeater items="{{ colores }}" visibility="{{ colores? 'visible':'collapsed' }}">
+                        <Repeater.itemsLayout style.horizontalAlignment="right">
+                            <WrapLayout style.horizontalAlignment="right" />
+                        </Repeater.itemsLayout>
+                        <Repeater.itemTemplate style.horizontalAlignment="right">
+                            <Button id="{{ 'color'+$value }}" text="." margin="10" color="{{ '#'+$value }}" backgroundColor="{{ '#'+$value }}" cssClass="colorProducto" tap="selectColor" />
+                        </Repeater.itemTemplate>
+                    </Repeater>
+                </StackLayout>
+            </GridLayout>
 
-
-                    <Label text="{{ descripcion }}" />
-
-
-                    <TextView text="{{ descripcion }}" />
-
-                    <!-- additional view content -->
+            
+            
+            <GridLayout columns="auto,*" cssClass="grid">
+                <StackLayout col="0" style.marginBottom="30">
+                    <Label text="Características"  cssClass="titulo" />
+                    <Label text="{{ caracteristicas }}" textWrap="true" />
+                </StackLayout>
+                <StackLayout col="1" style.horizontalAlignment="right" style.verticalAlignment="bottom">
+                    <Label text="Solicitar Prueba" cssClass="solicitarProducto" textWrap="true" tap="selectSolicitar" />
                 </StackLayout>
             </GridLayout>
 

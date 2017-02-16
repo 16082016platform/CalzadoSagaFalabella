@@ -33,16 +33,17 @@
                 <WrapLayout />
             </Repeater.itemsLayout>
             <Repeater.itemTemplate>
-                <GridLayout rows="*, auto" tap="onListViewItemTap" index="{{ index }}" margin="10" width="100">
+                <GridLayout rows="*, auto" tap="onListViewItemTap" index="{{ index }}" padding="30" margin="30" width="300">
                     <android>
-                        <Image src="{{ subruta ? '~/images/'+categoria+'/' + imagen + '.jpg' : '~/images/vacio.jpg'}}" loadMode="async" stretch="aspectFill"/>
+                        <Image src="{{ subruta ? '~/images/categorias/'+details.subcategoriaExpand+'/' + details.codigo + '_1.jpg' : '~/images/vacio.jpg'}}" loadMode="async" stretch="aspectFill"/>
                     </android>
                     <ios>
-                        <Image src="{{ subruta ? '~/images/'+categoria+'/' + imagen + '.jpg' : '~/images/vacio.jpg'}}" stretch="aspectFill" loadMode="async" />
+                        <Image src="{{ subruta ? '~/images/categorias/'+details.subcategoriaExpand+'/' + details.codigo + '_1.jpg' : '~/images/vacio.jpg'}}" stretch="aspectFill" loadMode="async" />
                     </ios>
                     <StackLayout row="1" cssClass="recipeContainer">
-                        <Label text="{{ header }}" cssClass="recipeTitle"/>
-                        <!--<Label text="{{ descripcion }}" cssClass="recipeAuthor"/>-->
+                        <Label text="{{ details.marcaExpand }}" cssClass="marcaProducto"/>>
+                        <Label text="{{ header }}" cssClass="nombreProducto"/>
+                        <Label text="{{ 'S/ ' + details.precio }}" cssClass="precioProducto"/>>
                     </StackLayout>
                 </GridLayout>
             </Repeater.itemTemplate>

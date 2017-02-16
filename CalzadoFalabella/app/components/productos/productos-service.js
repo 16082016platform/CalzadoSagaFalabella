@@ -23,7 +23,16 @@ Service.prototype.getAllRecords = function(filter) {
         data = dataService.data('productos');
 
     expandExp = {
-
+        subcategoria: {
+            "TargetTypeName": "subcategorias",
+            "ReturnAs":"subcategoriaExpand",
+            "SingleField": "nombre",
+        },
+        marca: {
+            "TargetTypeName": "marcas",
+            "ReturnAs":"marcaExpand",
+            "SingleField": "nombre",
+        },
     };
 
     return data.expand(expandExp).get(filter)
