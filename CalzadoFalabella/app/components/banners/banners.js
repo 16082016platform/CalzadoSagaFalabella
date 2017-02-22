@@ -1,42 +1,26 @@
 'use strict';
-
-var frameModule = require("ui/frame");
-var imageModule = require("ui/image");
-
 var isInit = true,
     helpers = require('../../utils/widgets/helper'),
     navigationProperty = require('../../utils/widgets/navigation-property'),
 
-    service = require('./categorias-service'),
+    service = require('./banners-service'),
     // additional requires
 
-    viewModel = require('./categorias-view-model');
+    viewModel = require('./banners-view-model');
 
 function onListViewItemTap(args) {
-    var item = args.object;
-    var itemData = viewModel.get('listItems')[item.index];
-    stopCount();
+    var itemData = viewModel.get('listItems')[args.index];
+
     helpers.navigate({
-        moduleName: 'components/subcategorias/subcategorias',
-        animated: true,
-        transition: {
-            name: "slide"
-        },
-        context: {
-            filter: {
-                categoria: itemData.details.Id
-            },
-            categoria: {
-                categoria: itemData.header
-            }
-        }
+        moduleName: 'components/banners/itemDetails/itemDetails',
+        context: itemData.details
     });
 }
 exports.onListViewItemTap = onListViewItemTap;
 
 function flattenLocationProperties(dataItem) {
     var propName, propValue,
-        isLocation = function (value) {
+        isLocation = function(value) {
             return propValue && typeof propValue === 'object' &&
                 propValue.longitude && propValue.latitude;
         };
@@ -53,9 +37,10 @@ function flattenLocationProperties(dataItem) {
     }
 }
 // additional functions
-var page;
+
 function pageLoaded(args) {
-    page = args.object;
+    var page = args.object;
+
     helpers.platformInit(page);
     page.bindingContext = viewModel;
 
@@ -73,23 +58,22 @@ function pageLoaded(args) {
     };
 
     _fetchData()
-        .then(function (result) {
+        .then(function(result) {
             var itemsList = [];
-            var index = 0;
-            result.forEach(function (item) {
+
+            result.forEach(function(item) {
+
                 flattenLocationProperties(item);
 
                 itemsList.push({
 
                     header: item.nombre,
 
-                    index: index,
+                    description: item.ruta,
 
-                    imagen: item.nombre.replace(/ñ/g, 'n'),
                     // singleItem properties
                     details: item
                 });
-                index++;
             });
 
             viewModel.set('listItems', itemsList);
@@ -102,44 +86,13 @@ function pageLoaded(args) {
 
     if (isInit) {
         isInit = false;
+
+        // additional pageInit
     }
-    startCount();
 }
+
+// START_CUSTOM_CODE_banners
+// Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes
+
+// END_CUSTOM_CODE_banners
 exports.pageLoaded = pageLoaded;
-
-
-
-
-exports.resetCount = function (args) {
-    c = 0;
-}
-var c = 0, t, timer_is_on = 0;
-function timedCount() {
-    c++;
-    t = setTimeout(function () { timedCount() }, 1000);
-    if (c == 60) {
-        c = 0;
-        stopCount();
-        goToInicio();
-    }
-}
-function startCount() {
-    //if (!timer_is_on) {
-    timer_is_on = 1;
-    timedCount();
-    //}
-}
-function stopCount() {
-    clearTimeout(t);
-    timer_is_on = 0;
-    c = 0;
-}
-function goToInicio() {
-    helpers.navigate({
-        moduleName: 'components/homeView/homeView',
-        animated: true,
-        transition: {
-            name: "slide"
-        }
-    });
-}

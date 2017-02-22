@@ -1,4 +1,4 @@
-<Page xmlns="http://schemas.nativescript.org/tns.xsd" xmlns:widgets="utils/widgets" navigatedTo="navigatedTo" id="productosModelDetailsScreen" cssClass="screen">
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" xmlns:widgets="utils/widgets" navigatedTo="navigatedTo" id="productosModelDetailsScreen" cssClass="screen" tap="resetCount">
     <Page.actionBar>
         <widgets:action-bar />
     </Page.actionBar>
@@ -25,14 +25,14 @@
                     <Label text="{{ 'Código de producto: ' + codigo }}" style.fontWeight="bold" style.marginTop="0" style.marginBottom="30" />
                 </StackLayout>
                 <StackLayout col="1" row="0">
-                    <Label text="{{ 'S/ ' + precio }}" cssClass="precioProducto" />
-                    <WrapLayout orientation="horizontal" style.horizontalAlignment="right" >
+                    <Label text="{{ 'S/ ' + precio }}" cssClass="precioProducto" visibility="collapsed" />
+                    <!--<WrapLayout orientation="horizontal" style.horizontalAlignment="right" >
                         <Image src="{{ puntuacion>=1? '~/images/start.png': '~/images/startDisabled.png' }}" loadMode="async" stretch="none"/>
                         <Image src="{{ puntuacion>=2? '~/images/start.png': '~/images/startDisabled.png' }}" loadMode="async" stretch="none"/>
                         <Image src="{{ puntuacion>=3? '~/images/start.png': '~/images/startDisabled.png' }}" loadMode="async" stretch="none"/>
                         <Image src="{{ puntuacion>=4? '~/images/start.png': '~/images/startDisabled.png' }}" loadMode="async" stretch="none"/>
                         <Image src="{{ puntuacion>=5? '~/images/start.png': '~/images/startDisabled.png' }}" loadMode="async" stretch="none"/>
-                    </WrapLayout>
+                    </WrapLayout>-->
                 </StackLayout>
                 <Label col="0" row="1" colSpan="2" text="{{ descripcion }}" textWrap="true" cssClass="titulo" style.fontWeight="normal" style.marginBottom="30" style.marginTop="0" />
             </GridLayout>
@@ -50,7 +50,7 @@
                         </Repeater.itemTemplate>
                     </Repeater>
                 </StackLayout>
-                <StackLayout col="1" style.textAlignment="right"  visibility="{{ colores? 'visible':'collapsed' }}">
+                <!--<StackLayout col="1" style.textAlignment="right"  visibility="{{ colores? 'visible':'collapsed' }}">
                     <Label text="Colores Disponibles" cssClass="titulo" />
                     <Repeater items="{{ colores }}">
                         <Repeater.itemsLayout style.horizontalAlignment="right">
@@ -60,10 +60,20 @@
                             <Button id="{{ 'color'+$value }}" text="." margin="10" color="{{ '#'+$value }}" backgroundColor="{{ '#'+$value }}" cssClass="colorProducto" tap="selectColor" />
                         </Repeater.itemTemplate>
                     </Repeater>
+                </StackLayout>-->
+                <StackLayout col="1" style.textAlignment="right"  visibility="{{ coloresObject? 'visible':'collapsed' }}">
+                    <Label text="Colores Disponibles" cssClass="titulo" />
+                    <Label id="nombreColor" text="" />
+                    <Repeater items="{{ coloresObject }}">
+                        <Repeater.itemsLayout style.horizontalAlignment="right">
+                            <WrapLayout style.horizontalAlignment="right" />
+                        </Repeater.itemsLayout>
+                        <Repeater.itemTemplate style.horizontalAlignment="right">
+                            <Button id="{{ 'color'+$value }}" text="{{$value}}" margin="10" color="{{ '#'+$value }}" backgroundColor="{{ '#'+$value }}" cssClass="colorProducto" tap="selectColor" />
+                        </Repeater.itemTemplate>
+                    </Repeater>                    
                 </StackLayout>
             </GridLayout>
-
-            
             
             <GridLayout columns="auto,*" cssClass="grid">
                 <StackLayout col="0" style.marginBottom="30">
@@ -74,6 +84,10 @@
                     <Label text="Solicitar Prueba" cssClass="solicitarProducto" textWrap="true" tap="selectSolicitar" />
                 </StackLayout>
             </GridLayout>
+
+            <AbsoluteLayout style.horizontalAlignment="center" style.verticalAlignment="bottom" marginTop="-110">
+                <Image src="~/images/back.png" tap="buttonBackTap" />
+            </AbsoluteLayout>
 
         </StackLayout>
     </ScrollView>

@@ -10,9 +10,8 @@ var isInit = true,
 
 function onListViewItemTap(args) {
     var page = args.object;
-    
     var itemData = viewModel.get('listItems')[page.index];
-
+    stopCount();
     helpers.navigate({
         moduleName: 'components/productos/itemDetails/itemDetails',
         animated: true,
@@ -26,7 +25,7 @@ exports.onListViewItemTap = onListViewItemTap;
 
 function flattenLocationProperties(dataItem) {
     var propName, propValue,
-        isLocation = function(value) {
+        isLocation = function (value) {
             return propValue && typeof propValue === 'object' &&
                 propValue.longitude && propValue.latitude;
         };
@@ -55,7 +54,7 @@ function pageLoaded(args) {
 
     function _fetchData() {
         var context = page.navigationContext;
-
+        viewModel.set('subcategoria', context.subcategoria.subcategoria);
         if (context && context.filter) {
             return service.getAllRecords(context.filter);
         }
@@ -64,25 +63,35 @@ function pageLoaded(args) {
     };
 
     _fetchData()
-        .then(function(result) {
+        .then(function (result) {
             var itemsList = [];
             var index = 0;
-            result.forEach(function(item) {
+            result.forEach(function (item) {
                 flattenLocationProperties(item);
-                
+
+                var coloresArray = [];
+                if (typeof (item.coloresObject) !== "undefined") {
+                    for (var key in item.coloresObject) {
+                        coloresArray.push(item.coloresObject[key].replace(/"/g, ""));                        
+                    }
+                }
+
                 itemsList.push({
                     header: item.nombre,
-                    
-                    subruta:  item.subruta,
+
+                    subruta: item.subruta,
 
                     index: index,
+
+                    coloresArray: coloresArray,
+
+                    precioDescuento: item.descuento > 0 ? (item.precio * (1 - (item.descuento / 100))).toFixed(2) : item.precio,
 
                     // singleItem properties
                     details: item
                 });
                 index++;
             });
-
             viewModel.set('listItems', itemsList);
             viewModel.set('isLoading', false);
         })
@@ -93,8 +102,7 @@ function pageLoaded(args) {
 
     if (isInit) {
         isInit = false;
-
-        // additional pageInit
+        startCount();
     }
 }
 
@@ -107,7 +115,46 @@ exports.pageLoaded = pageLoaded;
 
 var frameModule = require("ui/frame");
 function buttonBackTap(args) {
+    stopCount();
     var topmost = frameModule.topmost();
     topmost.goBack();
 }
 exports.buttonBackTap = buttonBackTap;
+
+
+
+
+
+exports.resetCount = function (args) {
+    c = 0;
+}
+var c = 0, t, timer_is_on = 0;
+function timedCount() {
+    c++;
+    t = setTimeout(function () { timedCount() }, 1000);
+    if (c == 60) {
+        c = 0;
+        stopCount();
+        goToInicio();
+    }
+}
+function startCount() {
+    //if (!timer_is_on) {
+    timer_is_on = 1;
+    timedCount();
+    //}
+}
+function stopCount() {
+    clearTimeout(t);
+    timer_is_on = 0;
+    c = 0;
+}
+function goToInicio() {
+    helpers.navigate({
+        moduleName: 'components/homeView/homeView',
+        animated: true,
+        transition: {
+            name: "slide"
+        }
+    });
+}

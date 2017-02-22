@@ -178,6 +178,40 @@
       "title": "Pedidos",
       "addToNavigation": true,
       "icon": "cart"
+    },
+    {
+      "type": "NativeScript:view",
+      "name": "banners",
+      "components": [
+        {
+          "type": "NativeScript:editableList",
+          "serverSideSorting": false,
+          "serverSidePaging": false,
+          "listExtraFields": [],
+          "detailExtraFields": [],
+          "addScreenExtraFields": [],
+          "editScreenExtraFields": [],
+          "components": [],
+          "name": "bannersModel",
+          "dataProvider": "backendServices",
+          "collection": "banners",
+          "headerField": "nombre",
+          "subHeaderField": "ruta",
+          "isMapView": false,
+          "addItemForm": false,
+          "editItemForm": false,
+          "deleteItemButton": false,
+          "pullToRefresh": false,
+          "endlessScroll": false,
+          "detailHeaderFieldSource": "dataBound",
+          "detailHeaderField": "horientacion",
+          "detailSubHeaderField": "nombre",
+          "detailDescriptionField": "ruta"
+        }
+      ],
+      "title": "Banners",
+      "addToNavigation": true,
+      "icon": "camera"
     }
   ],
   "dataProviders": [

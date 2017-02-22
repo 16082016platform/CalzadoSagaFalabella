@@ -1,33 +1,17 @@
-<Page xmlns="http://schemas.nativescript.org/tns.xsd" xmlns:widgets="utils/widgets" loaded="pageLoaded" id="productosScreen" cssClass="screen">
-    <Page.actionBar>
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" xmlns:widgets="utils/widgets" loaded="pageLoaded" id="productosScreen" cssClass="screen" tap="resetCount">
+    <!--<Page.actionBar>
         <widgets:action-bar />
-    </Page.actionBar>
-
-    <!--<StackLayout>
-
-        <GridLayout rows="auto, *">
-
-            <ListView row="1" items="{{ listItems }}" itemTap="onListViewItemTap">
-                <ListView.itemTemplate>
-                    <StackLayout>
-                        <GridLayout columns="*" cssClass="padded-label">
-
-
-                            <StackLayout col="0" cssClass="padded-label-stack">
-                                <Label text="{{ header }}" cssClass="title-label" textWrap="true" />
-                                <Label text="{{ description }}" textWrap="true" />
-                            </StackLayout>
-
-                        </GridLayout>
-                  
-                    </StackLayout>
-                </ListView.itemTemplate>
-            </ListView>
-            <ActivityIndicator row="1" busy="{{ isLoading }}" />
-        </GridLayout>
-    </StackLayout>-->
-
-    <ScrollView>
+    </Page.actionBar>-->
+ 
+    <ActionBar>
+        <ActionBar.titleView>
+            <GridLayout columns="auto, 5, *">
+            <Image src="~/images/logo.png"  width="70" height="70" />
+            <Label col="2" text="{{ subcategoria }}" minWidth="100" />
+            </GridLayout>
+        </ActionBar.titleView>
+    </ActionBar>
+    <!--<ScrollView>
         <Repeater items="{{ listItems }}">
             <Repeater.itemsLayout>
                 <WrapLayout />
@@ -41,14 +25,14 @@
                         <Image src="{{ subruta ? '~/images/categorias/'+details.subcategoriaExpand+'/' + details.codigo + '_1.jpg' : '~/images/vacio.jpg'}}" stretch="aspectFill" loadMode="async" />
                     </ios>
                     <StackLayout row="1" cssClass="recipeContainer">
-                        <Label text="{{ details.marcaExpand }}" cssClass="marcaProducto"/>>
+                        <Label text="{{ details.marcaExpand }}" cssClass="marcaProducto"/>
                         <Label text="{{ header }}" cssClass="nombreProducto"/>
-                        <Label text="{{ 'S/ ' + details.precio }}" cssClass="precioProducto"/>>
+                        <Label text="{{ 'S/ ' + details.precio }}" cssClass="precioProducto"/>
                     </StackLayout>
                 </GridLayout>
             </Repeater.itemTemplate>
         </Repeater>
-    </ScrollView>
+    </ScrollView>-->
 
     <GridLayout rows="auto, *,auto">
         <ScrollView>
@@ -65,16 +49,29 @@
                                 <Image src="{{ subruta ? '~/images/categorias/'+details.subcategoriaExpand+'/' + details.codigo + '_1.jpg' : '~/images/vacio.jpg'}}" stretch="aspectFill" loadMode="async" />
                             </ios>
                             <StackLayout row="1" cssClass="recipeContainer">
-                                <Label text="{{ details.marcaExpand }}" cssClass="marcaProducto"/>>
+                                <Label text="{{ details.marcaExpand }}" cssClass="marcaProducto"/>
                                 <Label text="{{ header }}" cssClass="nombreProducto"/>
-                                <Label text="{{ 'S/ ' + details.precio }}" cssClass="precioProducto"/>>
+                                <GridLayout columns="*,auto">
+                                    <Label text="{{ 'S/ ' + precioDescuento }}" cssClass="precioProducto"/>
+                                    <Label col="1" text="{{ 'Normal: S/ ' + details.precio }}" cssClass="precioRegular" visibility="{{ details.descuento>0?'visible':'collapsed'}}"/>
+                                </GridLayout>
+
+                                <Repeater items="{{ coloresArray }}">
+                                    <Repeater.itemsLayout>
+                                        <WrapLayout style.horizontalAlignment="left" />
+                                    </Repeater.itemsLayout>
+                                    <Repeater.itemTemplate>
+                                        <Button color="{{ '#'+$value }}" backgroundColor="{{ '#'+$value }}" cssClass="colorProducto"/>
+                                    </Repeater.itemTemplate>
+                                </Repeater>
+
                             </StackLayout>
                         </GridLayout>
                     </Repeater.itemTemplate>
                 </Repeater>
             </ScrollView>
         <ActivityIndicator row="1" busy="{{ isLoading }}" />
-        <AbsoluteLayout row="2" style.horizontalAlignment="right" style.verticalAlignment="bottom">
+        <AbsoluteLayout row="2" style.horizontalAlignment="center" style.verticalAlignment="bottom">
             <Image src="~/images/back.png" tap="buttonBackTap" />
         </AbsoluteLayout>
     </GridLayout>

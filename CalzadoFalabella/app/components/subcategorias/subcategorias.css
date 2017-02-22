@@ -2,3 +2,9 @@
     font-size:50;
     text-align:center;
 }
+
+Repeater GridLayout{
+    border-width: 1;
+    border-style: solid;
+    border-color: #d8d8d8;
+}

@@ -1,11 +1,7 @@
-<Page xmlns="http://schemas.nativescript.org/tns.xsd" xmlns:widgets="utils/widgets" loaded="pageLoaded" id="homeViewScreen" cssClass="screen">
-    <Page.actionBar>
-        <widgets:action-bar />
-    </Page.actionBar>
-
-    
-    <GridLayout id="gridSplashScreen">
-        
-    </GridLayout>
-    
+<Page xmlns="http://www.nativescript.org/tns.xsd" style.backgroundColor="#000000" >
+     {%raw%}<WebView src="http://designer.4yousee.com.br/play/rkUnyeYKx" tap="goToCategorias" />{%endraw%}
 </Page>
+
+
+
+

@@ -23,6 +23,10 @@ menuItems = [{
     "title": "Pedidos",
     "moduleName": "components/pedidos/pedidos",
     "icon": "\ue206"
+}, {
+    "title": "Banners",
+    "moduleName": "components/banners/banners",
+    "icon": "\ue205"
 }];
 
 navigationViewModel.set('menuItems', menuItems);

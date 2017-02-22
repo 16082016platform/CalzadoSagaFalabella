@@ -5,16 +5,16 @@ var ViewModel,
 
 ViewModel = new Observable({
 
-    pageTitle: 'Categorias',
+    pageTitle: 'Banners',
 
     isLoading: false,
     listItems: [],
     // additional properties
-    listItemsBanners: [],
+
 });
 
-// START_CUSTOM_CODE_categorias
+// START_CUSTOM_CODE_banners
 // Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes
 
-// END_CUSTOM_CODE_categorias
+// END_CUSTOM_CODE_banners
 module.exports = ViewModel;

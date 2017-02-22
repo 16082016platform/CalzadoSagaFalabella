@@ -9,8 +9,9 @@ var isInit = true,
     viewModel = require('./subcategorias-view-model');
 
 function onListViewItemTap(args) {
-    var itemData = viewModel.get('listItems')[args.index];
-
+    var page = args.object;
+    var itemData = viewModel.get('listItems')[page.index];
+    stopCount();
     helpers.navigate({
         moduleName: 'components/productos/productos',
         animated: true,
@@ -20,6 +21,9 @@ function onListViewItemTap(args) {
         context: {
             filter: {
                 subcategoria: itemData.details.Id
+            },
+            subcategoria: {
+                subcategoria: itemData.details.nombre
             }
         }
     });
@@ -28,7 +32,7 @@ exports.onListViewItemTap = onListViewItemTap;
 
 function flattenLocationProperties(dataItem) {
     var propName, propValue,
-        isLocation = function(value) {
+        isLocation = function (value) {
             return propValue && typeof propValue === 'object' &&
                 propValue.longitude && propValue.latitude;
         };
@@ -49,6 +53,8 @@ function flattenLocationProperties(dataItem) {
 function pageLoaded(args) {
     var page = args.object;
 
+
+    // page.navigationContext.pageTitle = page.navigationContext.categoria;
     helpers.platformInit(page);
     page.bindingContext = viewModel;
 
@@ -57,6 +63,7 @@ function pageLoaded(args) {
 
     function _fetchData() {
         var context = page.navigationContext;
+        viewModel.set('categoria', context.categoria.categoria);
 
         if (context && context.filter) {
             return service.getAllRecords(context.filter);
@@ -66,10 +73,10 @@ function pageLoaded(args) {
     };
 
     _fetchData()
-        .then(function(result) {
+        .then(function (result) {
             var itemsList = [];
-
-            result.forEach(function(item) {
+            var index = 0;
+            result.forEach(function (item) {
 
                 flattenLocationProperties(item);
 
@@ -80,8 +87,10 @@ function pageLoaded(args) {
                     description: item.categoria,
 
                     // singleItem properties
+                    index: index,
                     details: item
                 });
+                index++;
             });
 
             viewModel.set('listItems', itemsList);
@@ -94,9 +103,8 @@ function pageLoaded(args) {
 
     if (isInit) {
         isInit = false;
-
-        // additional pageInit
     }
+    startCount();
 }
 
 // START_CUSTOM_CODE_subcategorias
@@ -108,7 +116,47 @@ exports.pageLoaded = pageLoaded;
 
 var frameModule = require("ui/frame");
 function buttonBackTap(args) {
+    stopCount();
     var topmost = frameModule.topmost();
     topmost.goBack();
 }
 exports.buttonBackTap = buttonBackTap;
+
+
+
+
+
+
+exports.resetCount = function (args) {
+    c = 0;
+}
+var c = 0, t, timer_is_on = 0;
+function timedCount() {
+    c++;
+    t = setTimeout(function () { timedCount() }, 1000);
+    if (c == 60) {
+        c = 0;
+        stopCount();
+        goToInicio();
+    }
+}
+function startCount() {
+    //if (!timer_is_on) {
+    timer_is_on = 1;
+    timedCount();
+    //}
+}
+function stopCount() {
+    clearTimeout(t);
+    timer_is_on = 0;
+    c = 0;
+}
+function goToInicio() {
+    helpers.navigate({
+        moduleName: 'components/homeView/homeView',
+        animated: true,
+        transition: {
+            name: "slide"
+        }
+    });
+}

@@ -1,9 +1,45 @@
-<Page xmlns="http://schemas.nativescript.org/tns.xsd" xmlns:widgets="utils/widgets" loaded="pageLoaded" id="subcategoriasScreen" cssClass="screen">
-    <Page.actionBar>
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" xmlns:widgets="utils/widgets" loaded="pageLoaded" id="subcategoriasScreen" cssClass="screen" tap="resetCount">
+    <!--<Page.actionBar>
         <widgets:action-bar />
-    </Page.actionBar>
+    </Page.actionBar>-->
 
-    <StackLayout>
+    <ActionBar>
+        <ActionBar.titleView>
+            <GridLayout columns="auto, 5, *">
+            <Image src="~/images/logo.png"  width="70" height="70" />
+            <Label col="2" text="{{ categoria }}" minWidth="100" />
+            </GridLayout>
+        </ActionBar.titleView>
+    </ActionBar>
+
+
+    <StackLayout verticalAlignment="middle">
+        <GridLayout rows="auto, auto,*">
+            <Repeater row="1" items="{{ listItems }}">
+                            <Repeater.itemsLayout >
+                                <WrapLayout />
+                            </Repeater.itemsLayout>
+                            <Repeater.itemTemplate >
+                                <GridLayout rows="*, auto" tap="onListViewItemTap" index="{{ index }}" margin="55" width="410" cssClass="{{ 'padded-label-stack-' + index }}" >
+                                    <StackLayout row="1" cssClass="recipeContainer" margin="50"   >
+                                        <Label text="{{ header }}" cssClass="title-label"  textWrap="true"/>
+                                    </StackLayout>
+                                </GridLayout>
+                            </Repeater.itemTemplate>
+            </Repeater>
+            
+            <ActivityIndicator row="2" busy="{{ isLoading }}" />
+
+            <AbsoluteLayout row="2" style.horizontalAlignment="center" style.verticalAlignment="bottom">
+                <Image src="~/images/back.png" tap="buttonBackTap" />
+            </AbsoluteLayout>
+                
+        </GridLayout>
+
+        </StackLayout>
+
+
+    <!--<StackLayout>
 
         <GridLayout rows="auto, *,auto">
 
@@ -19,7 +55,6 @@
                             </StackLayout>
 
                         </GridLayout>
-                        <!-- additional view content -->
                     </StackLayout>
                 </ListView.itemTemplate>
             </ListView>
@@ -28,11 +63,5 @@
                 <Image src="~/images/back.png" tap="buttonBackTap" />
             </AbsoluteLayout>
         </GridLayout>
-        <!-- additional view content -->
-
-        <!-- START_CUSTOM_CODE_subcategorias -->
-        <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
-
-        <!-- END_CUSTOM_CODE_subcategorias -->
-    </StackLayout>
+    </StackLayout>-->
 </Page>
