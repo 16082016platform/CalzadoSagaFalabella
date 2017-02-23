@@ -1,8 +1,4 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" xmlns:widgets="utils/widgets" loaded="pageLoaded" id="productosScreen" cssClass="screen" tap="resetCount">
-    <!--<Page.actionBar>
-        <widgets:action-bar />
-    </Page.actionBar>-->
- 
     <ActionBar>
         <ActionBar.titleView>
             <GridLayout columns="auto, 5, *">
@@ -34,8 +30,8 @@
         </Repeater>
     </ScrollView>-->
 
-    <GridLayout rows="auto, *,auto">
-        <ScrollView>
+    <StackLayout>
+         <ScrollView height="95%">
                 <Repeater items="{{ listItems }}">
                     <Repeater.itemsLayout>
                         <WrapLayout />
@@ -64,15 +60,13 @@
                                         <Button color="{{ '#'+$value }}" backgroundColor="{{ '#'+$value }}" cssClass="colorProducto"/>
                                     </Repeater.itemTemplate>
                                 </Repeater>
-
                             </StackLayout>
+
+                            <ActivityIndicator row="0" busy="{{ isLoading }}" />
                         </GridLayout>
                     </Repeater.itemTemplate>
                 </Repeater>
             </ScrollView>
-        <ActivityIndicator row="1" busy="{{ isLoading }}" />
-        <AbsoluteLayout row="2" style.horizontalAlignment="center" style.verticalAlignment="bottom">
-            <Image src="~/images/back.png" tap="buttonBackTap" />
-        </AbsoluteLayout>
-    </GridLayout>
+        <Image src="~/images/back.png" tap="buttonBackTap"  height="5%" style.horizontalAlignment="center" style.verticalAlignment="bottom"/>
+    </StackLayout>
 </Page>

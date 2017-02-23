@@ -32,6 +32,8 @@ ViewModel = new Observable({
 
     talla: '',
 
+    nombre: '',
+
     // additional properties
 
 });

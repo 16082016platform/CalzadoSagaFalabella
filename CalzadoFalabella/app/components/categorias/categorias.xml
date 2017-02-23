@@ -1,9 +1,5 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd"  xmlns:widgets="utils/widgets" loaded="pageLoaded" id="categoriasScreen" cssClass="screen" tap="resetCount">
-    <!--<Page.actionBar>
-        <widgets:action-bar />
-    </Page.actionBar>-->
-
-    <ActionBar>
+     <ActionBar>
         <ActionBar.titleView>
             <GridLayout columns="auto, 5, *">
             <Image src="~/images/logo.png" width="70" height="70"  />
@@ -11,61 +7,24 @@
             </GridLayout>
         </ActionBar.titleView> 
     </ActionBar>
-
-    <StackLayout>
-        <GridLayout rows="auto, auto,*">
-            <Repeater row="1" items="{{ listItems }}" >
+    
+        <StackLayout>
+            <ScrollView row="0" height="75%">
+                <Repeater  items="{{ listItems }}" >
                             <Repeater.itemsLayout >
                                 <WrapLayout />
                             </Repeater.itemsLayout>
                             <Repeater.itemTemplate >
-                                <GridLayout rows="*, auto" tap="onListViewItemTap" index="{{ index }}" cssClass="{{ 'padded-label-stack-' + index }}" padding="50" marginTop="50" marginBottom="0"  marginLeft="50" marginRight="50" width="410" >
-                                    <android>
-                                        <Image src="{{ '~/images/categorias/' + imagen + '.jpg'}}" loadMode="async" stretch="aspectFill"/>
-                                    </android>
-                                    <ios>
-                                        <Image src="{{ '~/images/categorias/' + imagen + '.jpg'}}" stretch="aspectFill" loadMode="async"/>
-                                    </ios>
-                                    <StackLayout row="1" cssClass="recipeContainer" marginTop="30" >
+                                <GridLayout rows="*, auto" tap="onListViewItemTap" index="{{ index }}" cssClass="{{ 'padded-label-stack-' + index }}" padding="30%" marginTop="50" marginBottom="0"  marginLeft="5%" marginRight="5%" width="40%" >
+                                    <Image row="0" src="{{ '~/images/categorias/' + imagen + '.jpg'}}" loadMode="async" stretch="aspectFill"/>
+                                    <StackLayout row="1" cssClass="recipeContainer" marginTop="20%" >
                                         <Label text="{{ header }}" cssClass="title-label"  textWrap="true"/> 
                                     </StackLayout>
+                                    <ActivityIndicator row="0" busy="{{ isLoading }}" />
                                 </GridLayout>
                             </Repeater.itemTemplate>
-            </Repeater>
-            
-            <ActivityIndicator row="2" busy="{{ isLoading }}" />
-            
-             {%raw%}<WebView row="2" style.verticalAlignment="bottom" loadMode="async"   height="540" width="1080" src="http://designer.4yousee.com/play/rkK56mctx"/>{%endraw%}
-                
-        </GridLayout>
-
+                </Repeater>
+            </ScrollView>            
+            <WebView row="1" height="25%" width="100%" style.verticalAlignment="bottom" loadMode="async" src="http://designer.4yousee.com/play/rkK56mctx"/>
         </StackLayout>
-
-
-
-    <!--<StackLayout>
-        <GridLayout rows="auto, *,auto">
-
-            <ListView row="1" items="{{ listItems }}" itemTap="onListViewItemTap">
-                <ListView.itemTemplate>
-                    <StackLayout>
-                        <GridLayout columns="*" cssClass="padded-label">
-
-                            <StackLayout col="0" cssClass="{{ 'padded-label-stack-' + index }}">
-                                <Image src="{{ '~/images/categorias/' + imagen + '.jpg'}}"/>
-                            </StackLayout>
-                            <Label text="{{ header }}" cssClass="title-label"  textWrap="true"  />
-
-                        </GridLayout>
-                    </StackLayout>
-                </ListView.itemTemplate>
-            </ListView>
-            <ActivityIndicator row="1" busy="{{ isLoading }}" />
-            
-            <GridLayout row="2" padding="30" style.verticalAlignment="bottom" >
-                    <Image  src="{{ '~/images/banners/' + listItemsBanners[0].details.ruta + '.jpg'}}" loadMode="async" stretch="aspectFit" />        
-            </GridLayout>
-                
-        </GridLayout>
-    </StackLayout>-->
 </Page>

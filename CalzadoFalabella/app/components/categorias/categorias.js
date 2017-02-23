@@ -3,6 +3,10 @@
 var frameModule = require("ui/frame");
 var imageModule = require("ui/image");
 
+var animation = require("ui/animation");
+var colorModule = require("color");
+var enums = require("ui/enums");
+
 var isInit = true,
     helpers = require('../../utils/widgets/helper'),
     navigationProperty = require('../../utils/widgets/navigation-property'),
@@ -12,10 +16,29 @@ var isInit = true,
 
     viewModel = require('./categorias-view-model');
 
+var fileSystemModule = require("file-system");
+var fileName = "categorias.json";
+var file = fileSystemModule.knownFolders.documents().getFile(fileName);
+
+
 function onListViewItemTap(args) {
-    var item = args.object;
-    var itemData = viewModel.get('listItems')[item.index];
     stopCount();
+    var item = args.object;
+    item.android.bringToFront();
+    item.animate({
+        // opacity: 0,
+        backgroundColor: new colorModule.Color("#b2c804"),
+        // translate: { x: 500, y: 500 },
+        scale: { x: 2, y: 2 },
+        rotate: 360,
+        duration: 2000,
+        delay: 100,
+        iterations: 1,
+        curve: enums.AnimationCurve.easeIn
+    });
+    return;
+
+    var itemData = viewModel.get('listItems')[item.index];
     helpers.navigate({
         moduleName: 'components/subcategorias/subcategorias',
         animated: true,
@@ -59,45 +82,45 @@ function pageLoaded(args) {
     helpers.platformInit(page);
     page.bindingContext = viewModel;
 
-    viewModel.set('isLoading', true);
-    viewModel.set('listItems', []);
+    // viewModel.set('isLoading', true);
+    // viewModel.set('listItems', []);
 
-    function _fetchData() {
-        var context = page.navigationContext;
+    // function _fetchData() {
+    //     var context = page.navigationContext;
 
-        if (context && context.filter) {
-            return service.getAllRecords(context.filter);
-        }
+    //     if (context && context.filter) {
+    //         return service.getAllRecords(context.filter);
+    //     }
 
-        return service.getAllRecords();
-    };
+    //     return service.getAllRecords();
+    // };
 
-    _fetchData()
-        .then(function (result) {
-            var itemsList = [];
-            var index = 0;
-            result.forEach(function (item) {
-                flattenLocationProperties(item);
+    // _fetchData()
+    //     .then(function (result) {
+    //         var itemsList = [];
+    //         var index = 0;
+    //         result.forEach(function (item) {
+    //             flattenLocationProperties(item);
 
-                itemsList.push({
+    //             itemsList.push({
 
-                    header: item.nombre,
+    //                 header: item.nombre,
 
-                    index: index,
+    //                 index: index,
 
-                    imagen: item.nombre.replace(/ñ/g, 'n'),
-                    // singleItem properties
-                    details: item
-                });
-                index++;
-            });
+    //                 imagen: item.nombre.replace(/ñ/g, 'n'),
+    //                 // singleItem properties
+    //                 details: item
+    //             });
+    //             index++;
+    //         });
 
-            viewModel.set('listItems', itemsList);
-            viewModel.set('isLoading', false);
-        })
-        .catch(function onCatch() {
-            viewModel.set('isLoading', false);
-        });
+    //         viewModel.set('listItems', itemsList);
+    //         viewModel.set('isLoading', false);
+    //     })
+    //     .catch(function onCatch() {
+    //         viewModel.set('isLoading', false);
+    //     });
     // additional pageLoaded
 
     if (isInit) {

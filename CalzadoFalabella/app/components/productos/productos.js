@@ -49,55 +49,73 @@ function pageLoaded(args) {
     helpers.platformInit(page);
     page.bindingContext = viewModel;
 
-    viewModel.set('isLoading', true);
-    viewModel.set('listItems', []);
 
-    function _fetchData() {
-        var context = page.navigationContext;
-        viewModel.set('subcategoria', context.subcategoria.subcategoria);
-        if (context && context.filter) {
-            return service.getAllRecords(context.filter);
+    var lista = viewModel.get('listItems');
+    var coloresArray = [];
+    for (var i = 0; i < lista.length; i++) {
+        if (typeof (lista[i].coloresObject) !== "undefined") {
+            for (var key in lista[i].coloresObject) {
+                coloresArray.push(lista[i].coloresObject[key].replace(/"/g, ""));
+            }
+            lista[i].coloresArray = coloresArray;
+            lista[i].precioDescuento = lista[i].descuento > 0 ? (lista[i].precio * (1 - (lista[i].descuento / 100))).toFixed(2) : lista[i].precio;
         }
+    }
 
-        return service.getAllRecords();
-    };
 
-    _fetchData()
-        .then(function (result) {
-            var itemsList = [];
-            var index = 0;
-            result.forEach(function (item) {
-                flattenLocationProperties(item);
 
-                var coloresArray = [];
-                if (typeof (item.coloresObject) !== "undefined") {
-                    for (var key in item.coloresObject) {
-                        coloresArray.push(item.coloresObject[key].replace(/"/g, ""));                        
-                    }
-                }
 
-                itemsList.push({
-                    header: item.nombre,
 
-                    subruta: item.subruta,
 
-                    index: index,
+    // viewModel.set('isLoading', true);
+    // viewModel.set('listItems', []);
 
-                    coloresArray: coloresArray,
+    // function _fetchData() {
+    var context = page.navigationContext;
+    viewModel.set('subcategoria', context.subcategoria.subcategoria);
+    //     if (context && context.filter) {
+    //         return service.getAllRecords(context.filter);
+    //     }
 
-                    precioDescuento: item.descuento > 0 ? (item.precio * (1 - (item.descuento / 100))).toFixed(2) : item.precio,
+    //     return service.getAllRecords();
+    // };
 
-                    // singleItem properties
-                    details: item
-                });
-                index++;
-            });
-            viewModel.set('listItems', itemsList);
-            viewModel.set('isLoading', false);
-        })
-        .catch(function onCatch() {
-            viewModel.set('isLoading', false);
-        });
+    // _fetchData()
+    //     .then(function (result) {
+    //         var itemsList = [];
+    //         var index = 0;
+    //         result.forEach(function (item) {
+    //             flattenLocationProperties(item);
+
+    //             var coloresArray = [];
+    //             if (typeof (item.coloresObject) !== "undefined") {
+    //                 for (var key in item.coloresObject) {
+    //                     coloresArray.push(item.coloresObject[key].replace(/"/g, ""));                        
+    //                 }
+    //             }
+
+    //             itemsList.push({
+    //                 header: item.nombre,
+
+    //                 subruta: item.subruta,
+
+    //                 index: index,
+
+    //                 coloresArray: coloresArray,
+
+    //                 precioDescuento: item.descuento > 0 ? (item.precio * (1 - (item.descuento / 100))).toFixed(2) : item.precio,
+
+    //                 // singleItem properties
+    //                 details: item
+    //             });
+    //             index++;
+    //         });
+    //         viewModel.set('listItems', itemsList);
+    //         viewModel.set('isLoading', false);
+    //     })
+    //     .catch(function onCatch() {
+    //         viewModel.set('isLoading', false);
+    //     });
     // additional pageLoaded
 
     if (isInit) {

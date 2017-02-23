@@ -1,8 +1,4 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" xmlns:widgets="utils/widgets" loaded="pageLoaded" id="subcategoriasScreen" cssClass="screen" tap="resetCount">
-    <!--<Page.actionBar>
-        <widgets:action-bar />
-    </Page.actionBar>-->
-
     <ActionBar>
         <ActionBar.titleView>
             <GridLayout columns="auto, 5, *">
@@ -13,55 +9,24 @@
     </ActionBar>
 
 
-    <StackLayout verticalAlignment="middle">
-        <GridLayout rows="auto, auto,*">
-            <Repeater row="1" items="{{ listItems }}">
+    <StackLayout>
+        <ScrollView height="95%">
+            <Repeater items="{{ listItems }}" verticalAlignment="middle">
                             <Repeater.itemsLayout >
                                 <WrapLayout />
                             </Repeater.itemsLayout>
                             <Repeater.itemTemplate >
-                                <GridLayout rows="*, auto" tap="onListViewItemTap" index="{{ index }}" margin="55" width="410" cssClass="{{ 'padded-label-stack-' + index }}" >
-                                    <StackLayout row="1" cssClass="recipeContainer" margin="50"   >
+                                <GridLayout rows="auto" tap="onListViewItemTap" index="{{ index }}" margin="5%" width="40%" marginTop="50" cssClass="{{ 'padded-label-stack-' + index }}" >
+                                    <StackLayout cssClass="recipeContainer" margin="50"   >
                                         <Label text="{{ header }}" cssClass="title-label"  textWrap="true"/>
                                     </StackLayout>
-                                </GridLayout>
+                                    <ActivityIndicator row="0" busy="{{ isLoading }}" /> 
+                                </GridLayout>                                
                             </Repeater.itemTemplate>
             </Repeater>
-            
-            <ActivityIndicator row="2" busy="{{ isLoading }}" />
-
-            <AbsoluteLayout row="2" style.horizontalAlignment="center" style.verticalAlignment="bottom">
-                <Image src="~/images/back.png" tap="buttonBackTap" />
-            </AbsoluteLayout>
-                
-        </GridLayout>
-
-        </StackLayout>
-
-
-    <!--<StackLayout>
-
-        <GridLayout rows="auto, *,auto">
-
-            <ListView row="1" items="{{ listItems }}" itemTap="onListViewItemTap">
-                <ListView.itemTemplate>
-                    <StackLayout>
-                        <GridLayout columns="*" cssClass="padded-label">
-
-
-                            <StackLayout col="0" cssClass="padded-label-stack">
-                                <Label text="{{ header }}" cssClass="title-label" textWrap="true" />
-                                
-                            </StackLayout>
-
-                        </GridLayout>
-                    </StackLayout>
-                </ListView.itemTemplate>
-            </ListView>
-            <ActivityIndicator row="1" busy="{{ isLoading }}" />
-            <AbsoluteLayout row="2" style.horizontalAlignment="right" style.verticalAlignment="bottom">
-                <Image src="~/images/back.png" tap="buttonBackTap" />
-            </AbsoluteLayout>
-        </GridLayout>
-    </StackLayout>-->
+        </ScrollView> 
+        
+        <Image src="~/images/back.png" tap="buttonBackTap"  height="5%" style.horizontalAlignment="center" style.verticalAlignment="bottom"/>
+        
+    </StackLayout>
 </Page>

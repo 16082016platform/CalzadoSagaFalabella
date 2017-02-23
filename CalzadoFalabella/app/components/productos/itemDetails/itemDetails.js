@@ -4,7 +4,7 @@ var helpers = require('../../../utils/widgets/helper'),
 
     dataService = require('../../../dataProviders/backendServices');
 
-var productoSelected, tallaSelected, colorSelected, nombreColorSelected, codigoSelected, subrutaSelected, precioSelected;
+var nombreSelected, productoSelected, tallaSelected, colorSelected, nombreColorSelected, codigoSelected, subrutaSelected, precioSelected;
 
 var page, coloresValues = [], coloresKeys = [];
 var coloresRutaValues = [], coloresRutaKeys = [];
@@ -15,6 +15,7 @@ function navigatedTo(args) {
     productoSelected = page.navigationContext.Id;
     codigoSelected = page.navigationContext.codigo;
     precioSelected = page.navigationContext.precio;
+    nombreSelected = page.navigationContext.nombre;
     // context changes
 
     var subruta = page.navigationContext.subruta;
@@ -29,6 +30,7 @@ function navigatedTo(args) {
     var tallas = page.navigationContext.tallas;
     var coloresObject = page.navigationContext.coloresObject;
     var coloresRuta = page.navigationContext.coloresRuta;
+    
 
     coloresValues = [];
     coloresKeys = [];
@@ -140,6 +142,10 @@ exports.selectImagen = selectImagen;
 
 function selectSolicitar(args) {
     stopCount();
+    if (page.getViewById("nombreColor").visibility == "visible") {
+        colorSelected = "ffffff"
+        nombreColorSelected = ""
+    }
     helpers.navigate({
         moduleName: 'components/pedidos/pedidos',
         animated: true,
@@ -154,6 +160,7 @@ function selectSolicitar(args) {
             subruta: subrutaSelected,
             codigo: codigoSelected,
             precio: precioSelected,
+            nombre: nombreSelected,
         }
     });
 }

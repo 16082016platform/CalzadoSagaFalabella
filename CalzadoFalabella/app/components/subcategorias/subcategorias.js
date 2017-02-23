@@ -58,47 +58,47 @@ function pageLoaded(args) {
     helpers.platformInit(page);
     page.bindingContext = viewModel;
 
-    viewModel.set('isLoading', true);
-    viewModel.set('listItems', []);
+    // viewModel.set('isLoading', true);
+    // viewModel.set('listItems', []);
 
-    function _fetchData() {
+    // function _fetchData() {
         var context = page.navigationContext;
         viewModel.set('categoria', context.categoria.categoria);
 
-        if (context && context.filter) {
-            return service.getAllRecords(context.filter);
-        }
+    //     if (context && context.filter) {
+    //         return service.getAllRecords(context.filter);
+    //     }
 
-        return service.getAllRecords();
-    };
+    //     return service.getAllRecords();
+    // };
 
-    _fetchData()
-        .then(function (result) {
-            var itemsList = [];
-            var index = 0;
-            result.forEach(function (item) {
+    // _fetchData()
+    //     .then(function (result) {
+    //         var itemsList = [];
+    //         var index = 0;
+    //         result.forEach(function (item) {
 
-                flattenLocationProperties(item);
+    //             flattenLocationProperties(item);
 
-                itemsList.push({
+    //             itemsList.push({
 
-                    header: item.nombre,
+    //                 header: item.nombre,
 
-                    description: item.categoria,
+    //                 description: item.categoria,
 
-                    // singleItem properties
-                    index: index,
-                    details: item
-                });
-                index++;
-            });
+    //                 // singleItem properties
+    //                 index: index,
+    //                 details: item
+    //             });
+    //             index++;
+    //         });
 
-            viewModel.set('listItems', itemsList);
-            viewModel.set('isLoading', false);
-        })
-        .catch(function onCatch() {
-            viewModel.set('isLoading', false);
-        });
+    //         viewModel.set('listItems', itemsList);
+    //         viewModel.set('isLoading', false);
+    //     })
+    //     .catch(function onCatch() {
+    //         viewModel.set('isLoading', false);
+    //     });
     // additional pageLoaded
 
     if (isInit) {

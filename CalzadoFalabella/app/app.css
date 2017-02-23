@@ -159,21 +159,14 @@ ActionBar {
     font-size: 50;
     height: 100;
 }
-AbsoluteLayout {
-    text-align: right;
-}
-
-AbsoluteLayout Image {
-    height: 100;
-    width: 100;
-    margin: 30;
-}
-
-
 
 /**/
 @keyframes play {
     from {
+        opacity: 0;
+        transform: scale(0, 0);
+    }
+    25% {
         opacity: 0;
         transform: scale(0.3, 0.3);
     }
@@ -196,7 +189,6 @@ AbsoluteLayout Image {
 }
 
 .padded-label-stack-0 {
-    margin: 2;
     animation-name: play;
     animation-duration: 0.1;
     animation-delay: 0.5;
@@ -206,7 +198,6 @@ AbsoluteLayout Image {
 }
 
 .padded-label-stack-1 {
-    margin: 2;
     animation-name: play;
     animation-duration: 0.4;
     animation-delay: 0.7;
@@ -216,7 +207,6 @@ AbsoluteLayout Image {
 }
 
 .padded-label-stack-2 {
-    margin: 2;
     animation-name: play;
     animation-duration: 0.4;
     animation-delay: 0.9;
@@ -226,7 +216,6 @@ AbsoluteLayout Image {
 }
 
 .padded-label-stack-3 {
-    margin: 2;
     animation-name: play;
     animation-duration: 0.4;
     animation-delay: 1.1;
@@ -236,7 +225,6 @@ AbsoluteLayout Image {
 }
 
 .padded-label-stack-4 {
-    margin: 2;
     animation-name: play;
     animation-duration: 0.4;
     animation-delay: 1.35;
@@ -246,7 +234,6 @@ AbsoluteLayout Image {
 }
 
 .padded-label-stack-5 {
-    margin: 2;
     animation-name: play;
     animation-duration: 0.4;
     animation-delay: 1.5;
@@ -256,7 +243,6 @@ AbsoluteLayout Image {
 }
 
 .padded-label-stack-6 {
-    margin: 2;
     animation-name: play;
     animation-duration: 0.4;
     animation-delay: 1.7;
@@ -266,7 +252,6 @@ AbsoluteLayout Image {
 }
 
 .padded-label-stack-7 {
-    margin: 2;
     animation-name: play;
     animation-duration: 0.4;
     animation-delay: 1.9;
@@ -276,7 +261,6 @@ AbsoluteLayout Image {
 }
 
 .padded-label-stack-8 {
-    margin: 2;
     animation-name: play;
     animation-duration: 0.4;
     animation-delay: 2.1;
@@ -286,7 +270,6 @@ AbsoluteLayout Image {
 }
 
 .padded-label-stack-9 {
-    margin: 2;
     animation-name: play;
     animation-duration: 0.4;
     animation-delay: 2.3;
@@ -296,7 +279,6 @@ AbsoluteLayout Image {
 }
 
 .padded-label-stack-10 {
-    margin: 2;
     animation-name: play;
     animation-duration: 0.4;
     animation-delay: 2.5;
@@ -309,6 +291,9 @@ AbsoluteLayout Image {
 
 @keyframes opacity {
     from {
+        transform: translate(0, 0);
+    }
+    12% {
         transform: translate(15, 10);
     }
     25% {
@@ -327,5 +312,5 @@ AbsoluteLayout Image {
     text-align: center;
     animation-name: opacity;
     animation-duration: 10;
-    z-index	:999;
+    animation-delay: 1.5;
 }

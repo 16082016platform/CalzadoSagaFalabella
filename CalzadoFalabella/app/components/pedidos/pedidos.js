@@ -66,6 +66,8 @@ function saveData() {
 
         talla: viewModel.get('talla'),
 
+        nombre: viewModel.get('nombre'),
+
         // save properties
 
     })
@@ -104,6 +106,7 @@ function pageLoaded(args) {
     viewModel.set('color', datos.color);
     viewModel.set('nombreColor', datos.nombreColor);
     viewModel.set('estado', 'Pendiente');
+    viewModel.set('nombre', datos.nombre);
 
     onpedidosModelFormSubmit();
 

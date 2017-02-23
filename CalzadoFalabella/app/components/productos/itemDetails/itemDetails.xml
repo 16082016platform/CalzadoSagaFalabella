@@ -85,8 +85,8 @@
                 </StackLayout>
             </GridLayout>
 
-            <AbsoluteLayout style.horizontalAlignment="center" style.verticalAlignment="bottom" marginTop="-110">
-                <Image src="~/images/back.png" tap="buttonBackTap" />
+            <AbsoluteLayout style.horizontalAlignment="center" style.verticalAlignment="bottom" >
+                <Image src="~/images/back.png" tap="buttonBackTap" height="100"/>
             </AbsoluteLayout>
 
         </StackLayout>
